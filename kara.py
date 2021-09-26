@@ -225,7 +225,7 @@ def treeRight():
 def isTreeFromKara(x, y):
     player_x, player_y = find_player()
     
-    return isTree(player_x + x, player_y+ y)
+    return isTree(player_x + x, player_y + y)
     
 def isTree(x, y):
     return level[y][x] == wall
@@ -289,11 +289,7 @@ def is_level_complete():
             if cell == box:
                 complete = False
 
-    if complete:
-        current_level += 1
-        if current_level >= len(levels):
-            current_level = 0
-        load_level()
+    return complete
 
 def draw():
     global window, canvas, objs
@@ -322,7 +318,6 @@ def draw():
                 i += 1
                 
     canvas.update() #window.mainloop()
-    print('draw')
     
     time.sleep(TIME_S)
 
