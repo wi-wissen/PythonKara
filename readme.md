@@ -47,7 +47,7 @@ Syntax for creating a level is compatible to [GreenfootKara](https://github.com/
 
 
 
-### Contributing
+## Contributing
 
 I would love to see PythonKara in action! Please release your exercises with PythonKara to help other teachers to make there lessons also great. :smile:
 
