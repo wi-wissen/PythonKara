@@ -294,6 +294,30 @@ def is_level_complete():
 def draw():
     global window, canvas, objs
     
+    #grid
+    cells_y = len(level)-1
+    cells_x = 0
+    for line in level:
+        if len(line)-1 > cells_x: cells_x = len(line)-1
+        
+    print(level)
+    print(cells_y)
+    print(cells_x)
+    for y in range(cells_y+2):
+        canvas.create_line(
+            (offset_x - CELL_SIZE/2, offset_y + y * CELL_SIZE - CELL_SIZE/2), #start
+            (offset_x + (cells_x+1) * CELL_SIZE - CELL_SIZE/2, offset_y + y * CELL_SIZE - CELL_SIZE/2), #end
+            fill="#90b890" #rgb(144,184,144)
+        ) 
+        
+    for x in range(cells_x+2):    
+        canvas.create_line(
+            (offset_x + x * CELL_SIZE - CELL_SIZE/2, offset_y - CELL_SIZE/2), #start
+            (offset_x + x * CELL_SIZE - CELL_SIZE/2, offset_y + (cells_y+1) * CELL_SIZE - CELL_SIZE/2), #end
+            fill="#90b890" #rgb(144,184,144)
+        )
+    
+    #figures
     objs = {}
     i = 0
     for y, row in enumerate(level):
@@ -325,6 +349,7 @@ window = tkinter.Tk()
 window.title("PythonKara")
 window.geometry(str(WIDTH) + 'x' + str(HEIGHT))
 
+# window and background
 canvas = tkinter.Canvas(window, width=WIDTH, height=HEIGHT)
 canvas.pack()
 canvas.create_rectangle(0, 0, WIDTH, HEIGHT, fill="#B4E6B4")

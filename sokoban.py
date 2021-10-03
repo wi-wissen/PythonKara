@@ -164,8 +164,33 @@ def is_level_complete():
         load_level()
 
 def draw():
+    #background
     screen.fill((180, 230, 180))
-
+    
+    #grid
+    cells_y = len(level)-1
+    cells_x = 0
+    for line in level:
+        if len(line)-1 > cells_x: cells_x = len(line)-1
+        
+    print(level)
+    print(cells_y)
+    print(cells_x)
+    for y in range(cells_y+2):
+        screen.draw.line(
+            (offset_x - CELL_SIZE/2, offset_y + y * CELL_SIZE - CELL_SIZE/2), #start
+            (offset_x + (cells_x+1) * CELL_SIZE - CELL_SIZE/2, offset_y + y * CELL_SIZE - CELL_SIZE/2), #end
+            (144,184,144), # (r,g,b)
+        ) 
+        
+    for x in range(cells_x+2):    
+        screen.draw.line(
+            (offset_x + x * CELL_SIZE - CELL_SIZE/2, offset_y - CELL_SIZE/2), #start
+            (offset_x + x * CELL_SIZE - CELL_SIZE/2, offset_y + (cells_y+1) * CELL_SIZE - CELL_SIZE/2), #end
+            (144,184,144), # (r,g,b)
+        )    
+    
+    #figures
     for y, row in enumerate(level):
         for x, cell in enumerate(row):
             if cell != empty:
