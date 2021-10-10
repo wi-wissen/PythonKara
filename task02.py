@@ -10,4 +10,4 @@ exec(open("kara.py").read()) # Startet Kara
 
 # Kara möchte für ihre Freunde nach jedem Schritt eine Erdbeere hinlegen.
 
-move();
+move()

@@ -8,7 +8,7 @@ exec(open("kara.py").read()) # Startet Kara
 # Sensoren: onBerry(), treeFront(), treeLeft(), treeRight(), mushroomFront()
 # Aktoren: move(), turnLeft(), turnRight(), putBerry(), removeBerry()
 
-# Führe das Programm aus und ändere die Ausgabe, wenn vor Kara ein Baum ist.
+# Führe das Programm aus und ändere die Ausgabe, wenn vor Kara ein Baum ist. Beobachte Wo die Ausgabe erscheint
 
 if treeFront():
     print("Autsch, ein Baum!")

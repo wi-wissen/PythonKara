@@ -41,11 +41,17 @@ putBerry() # alias for putLeaf()
 
 Syntax for creating a level is compatible to [GreenfootKara](https://github.com/marcojakob/greenfoot-kara) and [Pgame Zero Simple Game Tutorials](https://simplegametutorials.github.io/pygamezero/sokoban/).
 
+To test your task you may change `from levels import` to `from tests import` to get an similar szenario.
+
 ### Play
 
 [Install Pygame Zero](https://pygame-zero.readthedocs.io/en/stable/installation.html) and run `sokoban.py`. You may change  `GAME_MODE` to `kara ` (press right to turn) or `sokoban` (press right to move right). 
 
+### Teach
 
+I am still learning how to teach Python. 
+
+Actual order of tasks: 1-6, 15, 18, 16, 07, 17, 8, 19, 10-13, 20-22
 
 ## Contributing
 

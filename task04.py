@@ -9,5 +9,6 @@ exec(open("kara.py").read()) # Startet Kara
 # Aktoren: move(), turnLeft(), turnRight(), putBerry(), removeBerry()
 # Ausgabe: print("Ausgabe")
 
-# Prüfe in allen Welten, ob Kara auf einer Erdbeere sitzt. Ist das der Fall, soll sie einen Jubelschrei ausstoßen. Wenn sie auf keiner Erdbeere sitzt, soll sie deprimiert ausstoßen, dass sie schon ihr ganzes Leben viel Pech hat.
+# Prüfe, ob Kara auf einer Erdbeere sitzt. Ist das der Fall, soll sie einen Jubelschrei ausstoßen.
+# Wenn sie auf keiner Erdbeere sitzt, soll sie deprimiert ausstoßen, dass sie schon ihr ganzes Leben viel Pech hat.
 

@@ -1,14 +1,14 @@
 from levels import * # Lade alle Level
 TIME_S = 0.5 # Wartezeit zwischen den Schritten
 
-current_level = 11 # aktuelles Level auswählen
+current_level = 1 # aktuelles Level auswählen
 
 exec(open("kara.py").read()) # Startet Kara
 
 # Sensoren: onBerry(), treeFront(), treeLeft(), treeRight(), mushroomFront()
 # Aktoren: move(), turnLeft(), turnRight(), putBerry(), removeBerry()
 
-# Kara möchte um ihren Wald im Uhrzeigersinn patrouillieren, um die köstlichen Erdbeeren vor einer Horde Brokkolies zu schützen.
-# Programmiere Kara so, dass sie endlos im Uhrzeigersinn um alle Wälder laufen kann.
+# Kara soll bis zu dem Baum laufen. Ist davor eine Beere isst sie diese heimlich.
+# Liegt vor dem Baum keine Beere legt sie um den Waldgott zu huldigen eine ab.
 
-turnRight()
+move()

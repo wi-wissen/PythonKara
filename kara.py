@@ -55,10 +55,20 @@ def load_level():
             level[index] = list(line)
         level = level[1:len(level)-1]
     
+    #find max
     offset_y = len(level)-1
     offset_x = 0
     for line in level:
         if len(line)-1 > offset_x: offset_x = len(line)-1
+        
+    #add missing empty fields if needed
+    for index, line in enumerate(level):
+        diff = int(offset_x - len(line)-1)
+        if(diff > 0):
+            for i in range(diff):
+                level[index].append(' ')
+    
+    #cell to pixel
     offset_y = (HEIGHT - offset_y * CELL_SIZE) / 2
     offset_x = (WIDTH - offset_x * CELL_SIZE) / 2
 
@@ -118,7 +128,7 @@ def move():
         dx = -1
     elif player_rotation == 'down':
         dy = 1
-    
+
     _move(player_x, player_y, dx, dy)
 
 def _move(player_x, player_y, dx, dy):
@@ -300,9 +310,6 @@ def draw():
     for line in level:
         if len(line)-1 > cells_x: cells_x = len(line)-1
         
-    print(level)
-    print(cells_y)
-    print(cells_x)
     for y in range(cells_y+2):
         canvas.create_line(
             (offset_x - CELL_SIZE/2, offset_y + y * CELL_SIZE - CELL_SIZE/2), #start
