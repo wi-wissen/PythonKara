@@ -51,7 +51,7 @@ To test your task you may change `from levels import` to `from tests import` to 
 
 I am still learning how to teach Python. 
 
-Actual order of tasks: 1-6, 15, 18, 16, 07, 17, 8, 19, 10-13, 20-22
+Actual order of tasks: 1-6, 15, 18, 16, 07, 17, 8, 19, 9-13, 20-22
 
 ## Contributing
 

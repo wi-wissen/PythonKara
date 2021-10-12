@@ -1,7 +1,7 @@
 from levels import * # Lade alle Level
 TIME_S = 0.5 # Wartezeit zwischen den Schritten
 
-current_level = 1 # aktuelles Level auswählen
+current_level = 18 # aktuelles Level auswählen
 
 exec(open("kara.py").read()) # Startet Kara
 

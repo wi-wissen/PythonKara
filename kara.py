@@ -63,9 +63,9 @@ def load_level():
         
     #add missing empty fields if needed
     for index, line in enumerate(level):
-        diff = int(offset_x - len(line)-1)
+        diff = int(offset_x - (len(line)-1))
         if(diff > 0):
-            for i in range(diff):
+            for i in range(diff + 1):
                 level[index].append(' ')
     
     #cell to pixel
@@ -214,16 +214,6 @@ def treeFront():
     
 def treeLeft():
     if player_rotation == 'right':
-        return isTreeFromKara(0, 1)   
-    elif player_rotation == 'up':
-        return isTreeFromKara(1, 0)
-    elif player_rotation == 'left':
-        return isTreeFromKara(0, -1)
-    elif player_rotation == 'down':
-        return isTreeFromKara(-1, 0)
-    
-def treeRight():
-    if player_rotation == 'right':
         return isTreeFromKara(0, -1)   
     elif player_rotation == 'up':
         return isTreeFromKara(-1, 0)
@@ -231,6 +221,16 @@ def treeRight():
         return isTreeFromKara(0, 1)
     elif player_rotation == 'down':
         return isTreeFromKara(1, 0)
+    
+def treeRight():
+    if player_rotation == 'right':
+        return isTreeFromKara(0, 1)   
+    elif player_rotation == 'up':
+        return isTreeFromKara(1, 0)
+    elif player_rotation == 'left':
+        return isTreeFromKara(0, -1)
+    elif player_rotation == 'down':
+        return isTreeFromKara(-1, 0)
     
 def isTreeFromKara(x, y):
     player_x, player_y = find_player()
