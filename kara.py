@@ -38,6 +38,7 @@ CELL_SIZE = 32
 HEIGHT = CELL_SIZE * 16
 WIDTH = CELL_SIZE * 16
 if 'TIME_S' not in globals(): TIME_S = 0.5
+if 'STRICT' not in globals(): STRICT = True
 
 level = []
 if 'current_level' not in globals(): current_level = 0
@@ -65,7 +66,7 @@ def load_level():
     for index, line in enumerate(level):
         diff = int(offset_x - (len(line)-1))
         if(diff > 0):
-            for i in range(diff + 1):
+            for i in range(diff):
                 level[index].append(' ')
     
     #cell to pixel
@@ -132,16 +133,22 @@ def move():
     _move(player_x, player_y, dx, dy)
 
 def _move(player_x, player_y, dx, dy):
-
-    current = level[player_y][player_x]
-    adjacent = level[player_y + dy][player_x + dx]
+    global level, STRICT
+    
+    if STRICT:
+        if player_y + dy < 0 or player_x + dx < 0:
+            raise Exception('Kara can not leave the world.')
+    
+    current = level[player_y][player_x] #kara or kara on kara on berry
+    adjacent = level[player_y + dy][player_x + dx] # next field
     beyond = ''
     if (
         0 <= player_y + dy + dy < len(level)
         and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
     ):
         beyond = level[player_y + dy + dy][player_x + dx + dx]
-
+    
+    #define next states
     next_adjacent = {
         empty: player,
         storage: player_on_storage,
@@ -159,14 +166,17 @@ def _move(player_x, player_y, dx, dy):
         box_on_storage: player_on_storage,
     }
 
-    if adjacent in next_adjacent:
+    if adjacent in next_adjacent: # next field
         level[player_y][player_x] = next_current[current]
         level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
 
-    elif beyond in next_beyond and adjacent in next_adjacent_push:
+    elif beyond in next_beyond and adjacent in next_adjacent_push: # field after next field
         level[player_y][player_x] = next_current[current]
         level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
         level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+        
+    elif STRICT: #can't move
+        raise Exception('Kara bumped into a tree.')
         
     is_level_complete()
     draw()
@@ -238,7 +248,10 @@ def isTreeFromKara(x, y):
     return isTree(player_x + x, player_y + y)
     
 def isTree(x, y):
-    return level[y][x] == wall
+    if len(level) > y and len(level[y]) > x:
+        return level[y][x] == wall
+    else:
+        return false; #no field
 
 def mushroomFront():
     if player_rotation == 'right':
@@ -256,7 +269,10 @@ def isMushroomFromKara(x, y):
     return isMushroom(player_x + x, player_y+ y)
     
 def isMushroom(x, y):
-    return level[y][x] == box or level[y][x] == box_on_storage
+    if len(level) > y and len(level[y]) > x:
+        return level[y][x] == box or level[y][x] == box_on_storage
+    else:
+        return false; #no field
 
 class Kara:
     def move(self):
@@ -348,7 +364,7 @@ def draw():
                 
                 i += 1
                 
-    canvas.update() #window.mainloop()
+    canvas.update()
     
     time.sleep(TIME_S)
 

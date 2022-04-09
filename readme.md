@@ -24,7 +24,8 @@ Place new file (e.g. `task01.py`) in this folder:
 
 ```python
 from levels import * # load levels
-TIME_S = 0.5 # set seed
+TIME_S = 0.5 # default, set seed
+STRIC = TRUE # default, prevent Kara from crashing into a tree or appearing on the other side of the world
 
 current_level = 1 # set actual level
 
@@ -57,7 +58,7 @@ Actual order of tasks: 1-6, 15, 18, 16, 07, 17, 8, 19, 9-13, 20-22
 
 I would love to see PythonKara in action! Please release your exercises with PythonKara to help other teachers to make there lessons also great. :smile:
 
-Thank you for considering contributing to the PythonKara ! Create a pull request or contact [me](https://wi-wissen.de/contact.php).
+Thank you for considering contributing to the PythonKara! Create a pull request or contact [me](https://wi-wissen.de/contact.php).
 
 
 
