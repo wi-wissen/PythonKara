@@ -10,4 +10,4 @@ exec(open("kara.py").read()) # Startet Kara
 
 # Kara möchte zwischen den Bäumen Slalom fahren. Der Anfang des Slaloms ist im Bild eingezeichnet.
 # Programmiere Kara, so dass sie den Slalom endlos hin- und zurück fährt.
-# Wie lange der Parcour ist (wieviele Bäume der Slalom hat), weiß Kara zu Beginn natürlich nicht.
+# Der Parcour geht immer um drei Bäume.

@@ -14,4 +14,4 @@ exec(open("kara.py").read()) # Startet Kara
 # Programmiere Kara so, dass sie die Erdbeeren findet und aufnimmt. Dabei soll sie nie an ihrem Ausgang vorbeilaufen, ohne ihn zu benutzen!
 # Zu Beginn schaut Kara immer nach rechts.
 
-turnRight
+turnRight()
