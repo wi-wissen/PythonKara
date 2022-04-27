@@ -251,7 +251,7 @@ def isTree(x, y):
     if len(level) > y and len(level[y]) > x:
         return level[y][x] == wall
     else:
-        return false; #no field
+        return False; #no field
 
 def mushroomFront():
     if player_rotation == 'right':
@@ -272,7 +272,7 @@ def isMushroom(x, y):
     if len(level) > y and len(level[y]) > x:
         return level[y][x] == box or level[y][x] == box_on_storage
     else:
-        return false; #no field
+        return False; #no field
 
 class Kara:
     def move(self):
