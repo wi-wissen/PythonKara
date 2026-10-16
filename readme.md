@@ -25,7 +25,7 @@ Place new file (e.g. `task01.py`) in this folder:
 ```python
 from levels import * # load levels
 TIME_S = 0.5 # default, set seed
-STRIC = TRUE # default, prevent Kara from crashing into a tree or appearing on the other side of the world
+STRICT = True # default: hitting a tree or the edge of the world is an error; False lets Kara walk through the edge and appear on the other side
 
 current_level = 1 # set actual level
 

@@ -132,22 +132,31 @@ def move():
 
     _move(player_x, player_y, dx, dy)
 
+def _field(x, y):
+    # Returns the coordinates of field (x, y) or None if it is outside of the world.
+    # Without STRICT the world wraps around, so every field exists.
+    if not STRICT:
+        return x % len(level[0]), y % len(level)
+    if 0 <= y < len(level) and 0 <= x < len(level[y]):
+        return x, y
+    return None
+
 def _move(player_x, player_y, dx, dy):
     global level, STRICT
-    
-    if STRICT:
-        if player_y + dy < 0 or player_x + dx < 0:
-            raise Exception('Kara can not leave the world.')
-    
+
+    next_field = _field(player_x + dx, player_y + dy)
+    if next_field is None:
+        raise Exception('Kara can not leave the world.')
+    next_x, next_y = next_field
+
     current = level[player_y][player_x] #kara or kara on kara on berry
-    adjacent = level[player_y + dy][player_x + dx] # next field
+    adjacent = level[next_y][next_x] # next field
     beyond = ''
-    if (
-        0 <= player_y + dy + dy < len(level)
-        and 0 <= player_x + dx + dx < len(level[player_y + dy + dy])
-    ):
-        beyond = level[player_y + dy + dy][player_x + dx + dx]
-    
+    beyond_field = _field(next_x + dx, next_y + dy)
+    if beyond_field is not None:
+        beyond_x, beyond_y = beyond_field
+        beyond = level[beyond_y][beyond_x]
+
     #define next states
     next_adjacent = {
         empty: player,
@@ -168,12 +177,12 @@ def _move(player_x, player_y, dx, dy):
 
     if adjacent in next_adjacent: # next field
         level[player_y][player_x] = next_current[current]
-        level[player_y + dy][player_x + dx] = next_adjacent[adjacent]
+        level[next_y][next_x] = next_adjacent[adjacent]
 
     elif beyond in next_beyond and adjacent in next_adjacent_push: # field after next field
         level[player_y][player_x] = next_current[current]
-        level[player_y + dy][player_x + dx] = next_adjacent_push[adjacent]
-        level[player_y + dy + dy][player_x + dx + dx] = next_beyond[beyond]
+        level[next_y][next_x] = next_adjacent_push[adjacent]
+        level[beyond_y][beyond_x] = next_beyond[beyond]
         
     elif STRICT: #can't move
         raise Exception('Kara bumped into a tree.')
@@ -182,16 +191,20 @@ def _move(player_x, player_y, dx, dy):
     draw()
 
 def putLeaf():
+    if STRICT and onLeaf():
+        raise Exception('Kara can not put down a berry, there is already one.')
     for test_y, row in enumerate(level):
             for test_x, cell in enumerate(row):
                 if cell == player:
                     level[test_y][test_x] = player_on_storage
                     draw()
-    
+
 def putBerry():
     putLeaf()
-    
+
 def removeLeaf():
+    if STRICT and not onLeaf():
+        raise Exception('Kara can not pick up a berry, there is none.')
     for test_y, row in enumerate(level):
             for test_x, cell in enumerate(row):
                 if cell == player_on_storage:
@@ -244,11 +257,14 @@ def treeRight():
     
 def isTreeFromKara(x, y):
     player_x, player_y = find_player()
-    
-    return isTree(player_x + x, player_y + y)
-    
+    field = _field(player_x + x, player_y + y)
+    if field is None:
+        return False #no field
+
+    return isTree(*field)
+
 def isTree(x, y):
-    if len(level) > y and len(level[y]) > x:
+    if 0 <= y < len(level) and 0 <= x < len(level[y]):
         return level[y][x] == wall
     else:
         return False; #no field
@@ -265,11 +281,14 @@ def mushroomFront():
     
 def isMushroomFromKara(x, y):
     player_x, player_y = find_player()
-    
-    return isMushroom(player_x + x, player_y+ y)
-    
+    field = _field(player_x + x, player_y + y)
+    if field is None:
+        return False #no field
+
+    return isMushroom(*field)
+
 def isMushroom(x, y):
-    if len(level) > y and len(level[y]) > x:
+    if 0 <= y < len(level) and 0 <= x < len(level[y]):
         return level[y][x] == box or level[y][x] == box_on_storage
     else:
         return False; #no field
@@ -290,17 +309,17 @@ class Kara:
     def removeBerry(self):
         removeBerry()
     def onLeaf(self):
-        onLeaf()
+        return onLeaf()
     def onBerry(self):
-        onBerry()
+        return onBerry()
     def treeFront(self):
-        treeFront()
+        return treeFront()
     def treeLeft(self):
-        treeLeft()
+        return treeLeft()
     def treeRight(self):
-        treeRight()
+        return treeRight()
     def mushroomFront(self):
-        mushroomFront()
+        return mushroomFront()
     
 kara = Kara()
 
